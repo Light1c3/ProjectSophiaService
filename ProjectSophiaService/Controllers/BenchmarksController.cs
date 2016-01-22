@@ -14,23 +14,53 @@ using ProjectSophia.ViewModels;
 
 namespace ProjectSophiaService.Controllers
 {
+    [RoutePrefix("api/benchmark")]
     public class BenchmarksController : ApiController
     {
         private ProjectSophiaServiceContext db = new ProjectSophiaServiceContext();
 
-        // GET: api/Benchmarks
-        public IEnumerable<BenchmarkViewModels.BenchmarkDTO> GetBenchmarks()
-        {            
-            var benchmarks = from b in db.Benchmarks select new BenchmarkViewModels.BenchmarkDTO()
+        // GET: api/BenchmarksDetailsv
+        [HttpGet]
+        [Route("all")]
+        public IEnumerable<BenchmarkViewModels.BenchmarkDetailDTO> GetBenchmarksDetails()
+        {
+            var benchmarkDetails = db.Benchmarks.Select(b => new BenchmarkViewModels.BenchmarkDetailDTO()
+                             {
+                                 Id = b.Id,
+                                 Username = b.Username,
+                                 CPU = b.AvgFPS,
+                                 GPU = b.GPU,
+                                 RAM = b.RAM,
+                                 AvgFPS = b.AvgFPS,
+                                 MaxFPS = b.MaxFPS,
+                                 MinFPS = b.MinFPS
+                             });
+            return benchmarkDetails;
+        }
+        
+        [HttpGet]
+        [Route("game/{gameId}")]
+        public IEnumerable<BenchmarkViewModels.BenchmarkDetailDTO> GetBenchmarksByGame(int gameId)
+        {
+            var benchmarks = db.Benchmarks
+                .Where(x => x.GameId == gameId)
+                .Select(b => new BenchmarkViewModels.BenchmarkDetailDTO()
             {
                 Id = b.Id,
                 Username = b.Username,
-                GameName = b.Game.Title,
-                AvgFPS = b.AvgFPS
-            };
+                CPU = b.AvgFPS,
+                GPU = b.GPU,
+                RAM = b.RAM,
+                AvgFPS = b.AvgFPS,
+                MaxFPS = b.MaxFPS,
+                MinFPS = b.MinFPS
+            });
             return benchmarks;
         }
-
+        public static IEnumerable<BenchmarkViewModels.BenchmarkDetailDTO> ConvertBenchmarkToVM(IEnumerable<Benchmark> benchmarks) {
+            ///Fill Out
+            return null;
+        }
         // GET: api/Benchmarks/5
         [ResponseType(typeof(Benchmark))]
         public async Task<IHttpActionResult> GetBenchmark(int id)

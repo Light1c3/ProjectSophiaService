@@ -29,8 +29,41 @@ namespace ProjectSophiaService.Migrations
             //
 
             context.Games.AddOrUpdate(x => x.Id,
-                new Game() {  Id = 1, Title = "Fallout 4" },
-                new Game() {  Id = 2, Title = "League of Legends"}
+                new Game()
+                {
+                    Id = 1,
+                    Title = "Fallout 4",
+                    Year = 2015,
+                    Publisher = "Bathesda",
+                    Description = "Fallout 4 is an open world action role-playing video game developed by Bethesda Game Studios and published by Bethesda Softworks. The fifth major installment in the Fallout series...",
+                    ImageUrl = "https://imgrszr-prod.s3.amazonaws.com/1_400--5c49c9942a51f3ad29244289a5de762f641b42cc.png"
+                },
+                 new Game()
+                 {
+                     Id = 2,
+                     Title = "Leageu Of Legends",
+                     Year = 2009,
+                     Publisher = "Riot Games",
+                     Description = "League of Legends is a Free2Play game developed by Riot Games. It is refered to as a MOBA (Multiplayer Online Battle Areana), and currently has the biggest active userbase in any game.",
+                     ImageUrl = "http://d2rhekw5qr4gcj.cloudfront.net/img/400sqf/from/uploads/course_photos/14091_lol.jpg"
+                 },
+                 new Game()
+                 {
+                     Id = 3,
+                     Title = "Battlefield 4",
+                     Year = 2013,
+                     Publisher = "Electronic Arts",
+                     Description = "Fallout 4 is an open world action role-playing video game developed by Bethesda Game Studios and published by Bethesda Softworks. The fifth major installment in the Fallout series...",
+                     ImageUrl = "http://d10e5q7gdrohow.cloudfront.net/wp-content/uploads/2014/02/battle-field-4-400x400.jpg"
+                 }, new Game()
+                 {
+                     Id = 4,
+                     Title = "Battlefront",
+                     Year = 2015,
+                     Publisher = "Electronic Arts",
+                     Description = "Fallout 4 is an open world action role-playing video game developed by Bethesda Game Studios and published by Bethesda Softworks. The fifth major installment in the Fallout series...",
+                     ImageUrl = "http://www.offgamers.com/blog/wp-content/uploads/2015/11/Star-Wars-Battlefront.jpg"
+                 }
                 );
 
             context.Benchmarks.AddOrUpdate(x => x.Id,
