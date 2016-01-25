@@ -14,17 +14,17 @@ using ProjectSophia.ViewModels;
 
 namespace ProjectSophiaService.Controllers
 {
-    [RoutePrefix("api/benchmark")]
+    [RoutePrefix("api/benchmarks")]
     public class BenchmarksController : ApiController
     {
         private ProjectSophiaServiceContext db = new ProjectSophiaServiceContext();
 
-        // GET: api/BenchmarksDetailsv
+        // GET: api/benchmarks/all
         [HttpGet]
         [Route("all")]
-        public IEnumerable<BenchmarkViewModels.BenchmarkDetailDTO> GetBenchmarksDetails()
+        public IEnumerable<BenchmarkViewModels.GameDTO> GetBenchmarksDetails()
         {
-            var benchmarkDetails = db.Benchmarks.Select(b => new BenchmarkViewModels.BenchmarkDetailDTO()
+            var benchmarkDetails = db.Benchmarks.Select(b => new BenchmarkViewModels.GameDTO()
                              {
                                  Id = b.Id,
                                  Username = b.Username,
@@ -40,15 +40,15 @@ namespace ProjectSophiaService.Controllers
         
         [HttpGet]
         [Route("game/{gameId}")]
-        public IEnumerable<BenchmarkViewModels.BenchmarkDetailDTO> GetBenchmarksByGame(int gameId)
+        public IEnumerable<BenchmarkViewModels.GameDTO> GetBenchmarksByGame(int gameId)
         {
             var benchmarks = db.Benchmarks
                 .Where(x => x.GameId == gameId)
-                .Select(b => new BenchmarkViewModels.BenchmarkDetailDTO()
+                .Select(b => new BenchmarkViewModels.GameDTO()
             {
                 Id = b.Id,
                 Username = b.Username,
-                CPU = b.AvgFPS,
+                CPU = b.CPU,
                 GPU = b.GPU,
                 RAM = b.RAM,
                 AvgFPS = b.AvgFPS,
@@ -57,7 +57,7 @@ namespace ProjectSophiaService.Controllers
             });
             return benchmarks;
         }
-        public static IEnumerable<BenchmarkViewModels.BenchmarkDetailDTO> ConvertBenchmarkToVM(IEnumerable<Benchmark> benchmarks) {
+        public static IEnumerable<BenchmarkViewModels.GameDTO> ConvertBenchmarkToVM(IEnumerable<Benchmark> benchmarks) {
             ///Fill Out
             return null;
         }
@@ -109,17 +109,15 @@ namespace ProjectSophiaService.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
+        [HttpPost]
+        [Route("add")]
         // POST: api/Benchmarks
         [ResponseType(typeof(Benchmark))]
         public async Task<IHttpActionResult> PostBenchmark(Benchmark benchmark)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
 
             db.Benchmarks.Add(benchmark);
-            await db.SaveChangesAsync();
+            db.SaveChanges();
 
             return CreatedAtRoute("DefaultApi", new { id = benchmark.Id }, benchmark);
         }

@@ -10,17 +10,32 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using ProjectSophiaService.Models;
+using ProjectSophia.ViewModels;
 
 namespace ProjectSophiaService.Controllers
 {
+    [RoutePrefix("api/games")]
     public class GamesController : ApiController
     {
         private ProjectSophiaServiceContext db = new ProjectSophiaServiceContext();
 
         // GET: api/Games
-        public IQueryable<Game> GetGames()
+        [HttpGet]
+        [Route("all")]
+        public IEnumerable<GameViewModels.GameDTO> GetGamesDetails()
         {
-            return db.Games;
+            var gameDetails = db.Games.Select(b => new GameViewModels.GameDTO()
+            {
+                Id = b.Id,
+                Title = b.Title,
+                Description = b.Description,
+                Year = b.Year,
+                ShortLink = b.ShortLink,
+                Publisher = b.Publisher,
+                ImageUrl = b.ImageUrl,
+                MarkCount = db.Benchmarks.Where(x => x.GameId == b.Id).Count()
+            });
+            return gameDetails;
         }
 
         // GET: api/Games/5

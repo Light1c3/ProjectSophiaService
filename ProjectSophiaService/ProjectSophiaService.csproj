@@ -244,6 +244,18 @@
     <Compile Include="Migrations\201601192010055_Initial.Designer.cs">
       <DependentUpon>201601192010055_Initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201601251515201_updateGameModel.cs" />
+    <Compile Include="Migrations\201601251515201_updateGameModel.Designer.cs">
+      <DependentUpon>201601251515201_updateGameModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201601251550565_updateGameModelShotLink.cs" />
+    <Compile Include="Migrations\201601251550565_updateGameModelShotLink.Designer.cs">
+      <DependentUpon>201601251550565_updateGameModelShotLink.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201601251604170_updateGameModelShortLink.cs" />
+    <Compile Include="Migrations\201601251604170_updateGameModelShortLink.Designer.cs">
+      <DependentUpon>201601251604170_updateGameModelShortLink.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -332,6 +344,15 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201601192010055_Initial.resx">
       <DependentUpon>201601192010055_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601251515201_updateGameModel.resx">
+      <DependentUpon>201601251515201_updateGameModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601251550565_updateGameModelShotLink.resx">
+      <DependentUpon>201601251550565_updateGameModelShotLink.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601251604170_updateGameModelShortLink.resx">
+      <DependentUpon>201601251604170_updateGameModelShortLink.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -14,8 +14,10 @@ namespace ProjectSophia.ViewModels
             public string Title { get; set; }
             public string Description { get; set; }
             public int Year { get; set; }
+            public string ShortLink { get; set; }
             public string Publisher { get; set; }
             public string ImageUrl { get; set; }
+            public int MarkCount { get; set; }
         }
     }
 }

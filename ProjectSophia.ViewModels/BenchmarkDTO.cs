@@ -15,7 +15,7 @@ namespace ProjectSophia.ViewModels
             public string GameName { get; set; }
             public string AvgFPS { get; set; }
         }
-        public class BenchmarkDetailDTO
+        public class GameDTO
         {
             public int Id { get; set; }
             public string Username { get; set; }
