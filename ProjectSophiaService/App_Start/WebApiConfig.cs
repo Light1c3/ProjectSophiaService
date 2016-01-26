@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Web.Http;
 using Microsoft.Owin.Security.OAuth;
 using Newtonsoft.Json.Serialization;
+using System.Web.Http.Cors;
 
 namespace ProjectSophiaService
 {
@@ -20,6 +21,11 @@ namespace ProjectSophiaService
             // Web API routes
             config.MapHttpAttributeRoutes();
 
+            //Enabling CORS
+            var cors = new EnableCorsAttribute("*", "*", "*");
+            config.EnableCors(cors);
+
+            //Pre-Existing Router
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{id}",

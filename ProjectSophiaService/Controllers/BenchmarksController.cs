@@ -11,6 +11,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using ProjectSophiaService.Models;
 using ProjectSophia.ViewModels;
+using System.Web.Http.Cors;
 
 namespace ProjectSophiaService.Controllers
 {
@@ -110,16 +111,21 @@ namespace ProjectSophiaService.Controllers
         }
 
         [HttpPost]
-        [Route("add")]
+        [Route("add", Name="AddBenchmark")]
         // POST: api/Benchmarks
         [ResponseType(typeof(Benchmark))]
-        public async Task<IHttpActionResult> PostBenchmark(Benchmark benchmark)
+        public async Task<HttpResponseMessage> PostBenchmark(Benchmark benchmark)
         {
 
             db.Benchmarks.Add(benchmark);
+
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = benchmark.Id }, benchmark);
+            var response = Request.CreateResponse(HttpStatusCode.Created);
+
+            string uri = Url.Link("AddBenchmark", new { id = benchmark.Id });
+            response.Headers.Location = new Uri(uri);
+            return response;
         }
 
         // DELETE: api/Benchmarks/5
