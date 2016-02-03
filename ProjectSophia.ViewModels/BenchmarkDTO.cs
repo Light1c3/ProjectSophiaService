@@ -19,6 +19,7 @@ namespace ProjectSophia.ViewModels
         {
             public int Id { get; set; }
             public string Username { get; set; }
+            public string GameName { get; set; }
             public string CPU { get; set; }
             public string GPU { get; set; }
             public string RAM { get; set; }

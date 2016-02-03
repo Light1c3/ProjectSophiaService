@@ -39,16 +39,23 @@ namespace ProjectSophiaService.Controllers
         }
 
         // GET: api/Games/5
-        [ResponseType(typeof(Game))]
-        public async Task<IHttpActionResult> GetGame(int id)
+        [HttpGet]
+        [Route("{gameId}")]
+        public IEnumerable<GameViewModels.GameDTO> getGameById(int gameId)
         {
-            Game game = await db.Games.FindAsync(id);
-            if (game == null)
+            var game = db.Games
+                .Where(x => x.Id == gameId)
+                .Select(b => new GameViewModels.GameDTO()
             {
-                return NotFound();
-            }
-
-            return Ok(game);
+                Id = b.Id,
+                Title = b.Title,
+                Description = b.Description,
+                Year = b.Year,
+                ShortLink = b.ShortLink,
+                Publisher = b.Publisher,
+                ImageUrl = b.ImageUrl,
+            });
+            return game;
         }
 
         // PUT: api/Games/5
